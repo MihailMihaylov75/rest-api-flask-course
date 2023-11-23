@@ -1,0 +1,74 @@
+### pyproject.toml for robotic-suite-next-gen-ui-tests
+
+### poetry stuff
+
+[tool.poetry]
+name = 'rest-api-flask'
+version = '0.0.4'
+description = ''
+authors = [
+    'Mihail Mihaylov <mihail.mihaylov@festo.com>',
+]
+
+
+[tool.poetry.dependencies]
+python = '^3.7'
+pytest = '^6.2.2'
+pytest-mock = '^3.5.1'
+
+[tool.poetry.dev-dependencies]
+coverage = {extras = ['toml'], version = '^5.4'}
+pytest-cov = '^2.11.1'
+patch = '^1.16'
+pylint = '^2.6.2'
+mypy = '^0.800'
+
+[[tool.poetry.source]]
+url = "https://adeartifactory1.de.festo.net/ui/repos/tree/General/lpat-pypi"
+verify_ssl = true
+name = "pypi-python-remote"
+
+[build-system]
+requires = ['poetry-core>=1.0.0']
+build-backend = 'poetry.core.masonry.api'
+
+### pytest configuration
+
+[tool.pytest.ini_options]
+minversion = '6.0'
+addopts = '-ra -qs --verbosity=1'
+testpaths = [
+    'tests',
+]
+console_output_style = 'count'
+cache_dir = '.cache/.pytest_cache'
+python_files = ' test_*.py *_test.py *_tests.py'
+python_classes = 'Test* *Test'
+python_functions = 'test_* *_test'
+
+### .coveragerc to control coverage.py
+# example: https://gist.github.com/M-J-Murray/7c3d538db07413614d9ff6f04ce28b57
+
+[tool.coverage.run]
+branch = true
+source = ['src/']
+data_file = '.cache/.coverage'
+# @TODO fill the path
+#omit = ['src/robotic_ui_tests/ui_tests/*']
+# omit = bad_file.py
+
+[tool.coverage.paths]
+source = ['src/']  # , '*/site-packages/'
+
+
+[tool.coverage.report]
+# Regexes for lines to exclude from consideration
+exclude_lines = [
+    'pragma: no cover',
+    'cov: no',
+    'def __repr__',
+    'if __name__ == .__main__.',
+]
+
+[tool.coverage.html]
+directory = '.cache/htmlcov'
