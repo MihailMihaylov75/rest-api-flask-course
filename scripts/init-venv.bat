@@ -21,20 +21,20 @@ python -m venv .venv
 
 echo.
 echo ** Updating pip setuptools and wheel ...
-.venv\Scripts\python -m pip install --index-url "https://adeartifactory1.de.festo.net/artifactory/api/pypi/pypi-python-remote/simple" -U pip setuptools wheel
+.venv\Scripts\python -m pip install -U pip setuptools wheel
 echo ** Updating pip setuptools and wheel OK...
 echo ** Installing requests ...
-.venv\Scripts\pip install --index-url "https://adeartifactory1.de.festo.net/artifactory/api/pypi/pypi-python-remote/simple" requests
+.venv\Scripts\pip install  requests
 echo ** Installing requests OK...
 echo ** Installing doit...
-.venv\Scripts\pip install --index-url "https://adeartifactory1.de.festo.net/artifactory/api/pypi/pypi-python-remote/simple" doit=="0.33.1"
+.venv\Scripts\pip install doit=="0.33.1"
 echo ** Installing doit OK...
 
 echo.
 echo ** Installing requirements...
 .venv\Scripts\doit init
 
-.venv\Scripts\pip install --index-url "https://adeartifactory1.de.festo.net/artifactory/api/pypi/pypi-python-remote/simple" jsonschema==3.2.0 --force-reinstall
+.venv\Scripts\pip install --index-url  jsonschema==3.2.0 --force-reinstall
 
 echo.
 echo Python virtual environment created which allows executing

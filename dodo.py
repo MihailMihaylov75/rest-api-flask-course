@@ -50,8 +50,6 @@ DOIT_DEP_FILE = DODOLIB_ROOT / 'doit.json'
 
 PATH = os.environ['PATH']
 ENVIRONMENT_NAME = os.environ.get('ENVIRONMENT_NAME')
-LOCAL_FESTO_REPO = \
-    "https://adeartifactory1.de.festo.net/artifactory/api/pypi/pypi-python-remote/simple"
 
 # see https://pydoit.org/configuration.html
 DOIT_CONFIG = {
@@ -155,7 +153,7 @@ def task_test_dodo() -> dict:
         'verbosity': 2,
         'basename': 'test-dodo',
         'actions': [
-            f'{VENV_BIN / "pip"} install --index-url {LOCAL_FESTO_REPO} pyfakefs',
+            f'{VENV_BIN / "pip"} install pyfakefs',
             with_env(f'pytest --no-cov {modules}'),
         ],
     }
@@ -270,9 +268,9 @@ def task_venv_dev() -> dict:
         'basename': 'venv-dev',
         'actions': [
             maybe_create_empty_venv_cmd,
-            with_env(f'{PYTHON_BIN} -m pip install --index-url {LOCAL_FESTO_REPO} -U pip setuptools wheel'),
+            with_env(f'{PYTHON_BIN} -m pip install  -U pip setuptools wheel'),
             f'{PYTHON_BIN} {SCRIPTS_DIR / "extract_req.py"} -o requirements.txt',
-            with_env(f'{PIP_BIN} install --index-url {LOCAL_FESTO_REPO} -Ur requirements.txt'),
+            with_env(f'{PIP_BIN} install  -Ur requirements.txt'),
             (_osremove, ['requirements.txt']),
         ]
     }
